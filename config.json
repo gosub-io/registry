@@ -1,0 +1,4 @@
+{
+  "dl": "http://registry.gosub.io/api/v1/crates/{crate}/{version}/download",
+  "api": "https://registry.gosub.io"
+}
