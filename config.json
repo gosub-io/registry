@@ -1,4 +1,4 @@
 {
-  "dl": "https://registry.gosub.io/api/v1/crates/{crate}-{version}",
+  "dl": "https://registry.gosub.io/{crate}-{version}.crate",
   "api": "https://registry.gosub.io"
 }
