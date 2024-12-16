@@ -8,7 +8,7 @@ You should add it to your .cargo/config.toml:
 
 ```
 [registries]
-gosub ={ index = "https://github.com/gosub-browser/registry.git" }
+gosub ={ index = "https://github.com/gosub-io/registry.git" }
 ```
 
 
