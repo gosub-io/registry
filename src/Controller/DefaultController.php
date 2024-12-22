@@ -36,7 +36,7 @@ class DefaultController extends AbstractController
     public function config_json(Request $request): JsonResponse
     {
         $url = $request->getScheme() . '://' . $request->getHost();
-        if ($request->getPort() !== 80) {
+        if ($request->getPort() !== 80 || $request->getPort() !== 443) {
             $url .= ":{$request->getPort()}";
         }
 
