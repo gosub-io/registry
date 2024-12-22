@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CrateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ApiController extends AbstractController
 {
     #[Route('/api/v1/crates/new', name: 'upload')]
-    public function upload(Request $request): JsonResponse
+    public function upload(Request $request, CrateService $crateService): JsonResponse
     {
         $data = $request->getContent();
 
@@ -29,7 +30,7 @@ class ApiController extends AbstractController
         ;
         file_put_contents($crate_path, $crate_data);
 
-        $path = $this->getPathFromCrate($crate_filename);
+        $path = $crateService->getCratePath($crate_filename);
         if (!file_exists(dirname($path))) {
             mkdir(dirname($path), 0777, true);
         }
@@ -41,15 +42,11 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/v1/crates', name: 'crates')]
-    public function crates(Request $request): JsonResponse{
+    public function crates(Request $request, CrateService $crateService): JsonResponse{
         $q = $request->query->get('q', '');
         $per_page = $request->query->get('per_page', 10);
 
-        $path =
-            $this->getParameter('kernel.project_dir') . '/' .
-            $this->getParameter('path_index') . '/'
-        ;
-        $crates = $this->scanCrates($path, $q);
+        $crates = $crateService->getIndicesByQuery($q);
 
         return new JsonResponse([
             'crates' => array_slice($crates, 0, $per_page),
@@ -57,27 +54,6 @@ class ApiController extends AbstractController
                 'total' => count($crates),
             ],
         ]);
-    }
-
-
-    protected function getPathFromCrate($crate): string
-    {
-        $path =
-            $this->getParameter('kernel.project_dir') . '/' .
-            $this->getParameter('path_index') . '/'
-        ;
-
-        if (strlen($crate) == 1) {
-            $path .= '1/' . $crate;
-        } else if (strlen($crate) == 2) {
-            $path .= '2/' . $crate;
-        } else if (strlen($crate) == 3) {
-            $path .= '3/' . $crate[0] . '/' . $crate;
-        } else {
-            $path .= substr($crate, 0, 2) . '/'. substr($crate, 2, 2) . '/' . $crate;
-        }
-
-        return $path;
     }
 
     protected function convertToIndex(array $json, string $crate_data)
