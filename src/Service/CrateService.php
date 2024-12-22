@@ -15,10 +15,8 @@ class CrateService {
 
     function getCratePath(string $crateName): string
     {
-        $crate_filename = str_replace('-', '_', $crateName);
-
         $basePath = realpath($this->crateDir);
-        $path = $basePath . '/' . $crate_filename;
+        $path = $basePath . '/' . $crateName;
 
         $realpath = realpath($path);
         if ($realpath === false || strpos($realpath, $basePath) !== 0) {
