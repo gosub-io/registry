@@ -18,7 +18,7 @@ class IndexController extends AbstractController
 
         $path =
             $this->getParameter('kernel.project_dir') . '/' .
-            $this->getParameter('crate_index_path') . '/' .
+            $this->getParameter('path_index') . '/' .
             $crate
         ;
 
