@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Service\CrateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,6 +19,12 @@ class IndexController extends AbstractController
             'selected_version' => $request->query->get('v', $versions[count($versions)-1]['vers'] ?? ''),
             'versions' => $versions,
         ]);
+    }
+
+    #[Route('/crates/{crate}', name: 'download')]
+    public function downloads(Request $request, string $crate, CrateService $crateService): Response {
+        $file = $this->file($crateService->getCratePath($crate));
+        return new Response($file);
     }
 
     #[Route('/{crate}', name: 'index', requirements: ['crate' => '.*'], priority: -100)]

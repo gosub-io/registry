@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 class CrateService {
     protected string $crateDir;
     protected string $indexDir;
@@ -9,6 +11,21 @@ class CrateService {
     function __construct(string $crateDir, string $indexDir) {
         $this->crateDir = $crateDir;
         $this->indexDir = $indexDir;
+    }
+
+    function getCratePath(string $crateName): string
+    {
+        $crate_filename = str_replace('-', '_', $crateName);
+
+        $basePath = realpath($this->crateDir);
+        $path = $basePath . '/' . $crate_filename;
+
+        $realpath = realpath($path);
+        if ($realpath === false || strpos($realpath, $basePath) !== 0) {
+            throw new NotFoundHttpException("invalid crate url");
+        }
+
+        return $realpath;
     }
 
     function getAllIndices(): array {
