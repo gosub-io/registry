@@ -1,0 +1,245 @@
+{
+  "name": "gosub_shared",
+  "vers": "0.1.0",
+  "deps": [
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "anyhow",
+      "features": [],
+      "version_req": "^1.0.94",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "chardet",
+      "features": [],
+      "version_req": "^0.2.4",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "chardetng",
+      "features": [],
+      "version_req": "^0.1.17",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "derive_more",
+      "features": [
+        "display"
+      ],
+      "version_req": "^1.0.0",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "encoding_rs",
+      "features": [],
+      "version_req": "^0.8.35",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "image",
+      "features": [],
+      "version_req": "^0.25.5",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "lazy_static",
+      "features": [],
+      "version_req": "^1.5.0",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "log",
+      "features": [],
+      "version_req": "^0.4.22",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "rand",
+      "features": [],
+      "version_req": "^0.9.0-beta.0",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "raw-window-handle",
+      "features": [],
+      "version_req": "^0.6.2",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "smallvec",
+      "features": [],
+      "version_req": "^1.13.2",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "thiserror",
+      "features": [],
+      "version_req": "^2.0.7",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "url",
+      "features": [],
+      "version_req": "^2.5.4",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "uuid",
+      "features": [
+        "v4"
+      ],
+      "version_req": "^1.11.0",
+      "target": null,
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "wasm-bindgen-test",
+      "features": [],
+      "version_req": "^0.3.45",
+      "target": null,
+      "kind": "dev",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "futures",
+      "features": [],
+      "version_req": "^0.3.31",
+      "target": "cfg(not(target_arch = \"wasm32\"))",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "getrandom",
+      "features": [
+        "js"
+      ],
+      "version_req": "^0.2.15",
+      "target": "cfg(target_arch = \"wasm32\")",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "js-sys",
+      "features": [],
+      "version_req": "^0.3.70",
+      "target": "cfg(target_arch = \"wasm32\")",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "wasm-bindgen",
+      "features": [],
+      "version_req": "^0.2.93",
+      "target": "cfg(target_arch = \"wasm32\")",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "wasm-bindgen-futures",
+      "features": [],
+      "version_req": "^0.4.47",
+      "target": "cfg(target_arch = \"wasm32\")",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    },
+    {
+      "optional": false,
+      "default_features": true,
+      "name": "web-sys",
+      "features": [
+        "Performance",
+        "Window",
+        "Worker",
+        "WorkerOptions",
+        "WorkerType"
+      ],
+      "version_req": "^0.3.72",
+      "target": "cfg(target_arch = \"wasm32\")",
+      "kind": "normal",
+      "registry": "https://github.com/rust-lang/crates.io-index"
+    }
+  ],
+  "features": {},
+  "authors": [
+    "Gosub Community <info@gosub.io>"
+  ],
+  "description": "Shared code and traits for the Gosub engine",
+  "documentation": null,
+  "homepage": null,
+  "readme": null,
+  "readme_file": null,
+  "keywords": [],
+  "categories": [],
+  "license": "MIT",
+  "license_file": null,
+  "repository": null,
+  "badges": {},
+  "links": null,
+  "rust_version": null
+}
