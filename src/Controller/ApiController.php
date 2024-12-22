@@ -24,7 +24,7 @@ class ApiController extends AbstractController
 
         $crate_path =
             $this->getParameter('kernel.project_dir') . '/' .
-            $this->getParameter('path_index') . '/' .
+            $this->getParameter('path_crates') . '/' .
             $crate_filename . '-'.$json['vers'].'.crate'
         ;
         file_put_contents($crate_path, $crate_data);
