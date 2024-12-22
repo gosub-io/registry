@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('{crate}', name: 'index', requirements: ['crate' => '.*'])]
+    #[Route('/{crate}', name: 'index', requirements: ['crate' => '.*'], priority: -100)]
     public function index(Request $request, string $crate): Response {
         $crate = str_replace('-', '_', $crate);
 

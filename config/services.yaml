@@ -1,0 +1,25 @@
+parameters:
+    registry_base_url: '%env(REGISTRY_BASE_URL)%'
+    crate_base_path: '%env(CRATE_BASE_PATH)%'
+    crate_index_path: '%env(CRATE_INDEX_PATH)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Security\AccessTokenHandler:
+        arguments:
+            $tokenPath: '%kernel.project_dir%/tokens.json'
+
+    App\Service\CrateService:
+        arguments:
+            $crateDir: '%kernel.project_dir%/%crate_base_path%'
+            $indexDir: '%kernel.project_dir%/%crate_index_path%'

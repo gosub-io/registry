@@ -37,9 +37,8 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/v1/crates', name: 'crates')]
-    public function crates(Request $request): JsonResponse
-    {
-        $q = $request->query->get('q');
+    public function crates(Request $request): JsonResponse{
+        $q = $request->query->get('q', '');
         $per_page = $request->query->get('per_page', 10);
 
         $path = $this->getParameter('kernel.project_dir') . '/public/index';
@@ -53,42 +52,6 @@ class ApiController extends AbstractController
         ]);
     }
 
-    protected function scanCrates(string $path, string $q): array {
-        $crates = [];
-
-        foreach (scandir($path) as $file) {
-            if ($file === '.' || $file === '..') {
-                continue;
-            }
-
-            if (is_dir($path . '/' . $file)) {
-                $crates = array_merge($crates, $this->scanCrates($path . '/' . $file, $q));
-                continue;
-            }
-
-            $index_lines = file($path . '/' . $file);
-            if (count($index_lines) == 0) {
-                continue;
-            }
-            $last_line = $index_lines[count($index_lines) - 1];
-            $last_version = json_decode($last_line, true);
-            if (!$last_version) {
-                continue;
-            }
-
-            if ($q && strpos($last_version['name'], $q) === false) {
-                continue;
-            }
-
-            $crates[] = [
-                'name' => $last_version['name'],
-                'max_version' => $last_version['vers'],
-                'description' => $last_version['description'] ?? '',
-            ];
-        }
-
-        return $crates;
-    }
 
     protected function getPathFromCrate($crate): string
     {

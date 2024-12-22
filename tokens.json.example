@@ -1,0 +1,8 @@
+[
+  {
+    "description": "Token for user john doe",   # Token description
+    "token": "<token here>",                    # Actual token
+    "expires_at": "2024-12-31T23:59:59",        # Valid until this time
+    "enabled": true                             # Token is enabled or not
+  }
+]
