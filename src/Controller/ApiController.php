@@ -62,7 +62,10 @@ class ApiController extends AbstractController
 
     protected function getPathFromCrate($crate): string
     {
-        $path = $this->getParameter('kernel.project_dir') . '/public/index/';
+        $path =
+            $this->getParameter('kernel.project_dir') . '/' .
+            $this->getParameter('crate_index_path') . '/'
+        ;
 
         if (strlen($crate) == 1) {
             $path .= '1/' . $crate;
