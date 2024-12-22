@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <p>At this point we do not host our gosub crates on <a href="https://crates.io">crates.io</a>. The crates are not
+        stable enough but we still want to experiment with registries in combination with the engine. This is why our
+        crates are currently hosted here.</p>
+
+
+    <h2>Available crates ({{ indices|length }})</h2>
+
+    <table>
+        <thead>
+            <th>Crate</th><th>Current version</th><th>Description</th>
+        </thead>
+        <tbody>
+        {% for index in indices %}
+            <tr>
+                <td><a href="gosub.io">{{ index.name }}</a></td>
+                <td>{{ index.max_version }}</td>
+                <td>{{ index.description | default("No description available") }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <h2>Usage</h2>
+    <p>In order to use these crates, you must update your <code>~/.cargo/config.toml</code> with the following entry:</p>
+
+    <div class="small">
+        <pre><code class="language-toml">
+# ~/.cargo/config.toml
+[registry.gosub]
+index = "sparse+https://registry.gosub.io"
+    </code></pre>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+import: 
+  - recipe/symfony.php
+
+config:
+  repository: 'https://github.com/gosub-io/registry.git'
+  shared_dirs:
+    - public/index
+    - public/crates
+
+hosts:
+  gosub.io:
+    labels:
+      - stage: prod
+    remote_user: deploy
+    deploy_path: '/wwwroot/registry.gosub.io'
+
+tasks:
+  build:
+    - run: uptime  
+
+after:
+  deploy:failed: deploy:unlock
