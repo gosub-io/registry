@@ -22,7 +22,11 @@ class ApiController extends AbstractController
         $crate_data = substr($data, 4 + $json_len[1] + 4, $crate_len[1]);
         $crate_filename = str_replace('-', '_', $json['name']);
 
-        $crate_path = $this->getParameter('kernel.project_dir') . '/public/crates/' . $crate_filename . '-'.$json['vers'].'.crate';
+        $crate_path =
+            $this->getParameter('kernel.project_dir') . '/' .
+            $this->getParameter('crate_index_path') . '/' .
+            $crate_filename . '-'.$json['vers'].'.crate'
+        ;
         file_put_contents($crate_path, $crate_data);
 
         $path = $this->getPathFromCrate($crate_filename);
@@ -41,7 +45,10 @@ class ApiController extends AbstractController
         $q = $request->query->get('q', '');
         $per_page = $request->query->get('per_page', 10);
 
-        $path = $this->getParameter('kernel.project_dir') . '/public/index';
+        $path =
+            $this->getParameter('kernel.project_dir') . '/' .
+            $this->getParameter('crate_index_path') . '/'
+        ;
         $crates = $this->scanCrates($path, $q);
 
         return new JsonResponse([

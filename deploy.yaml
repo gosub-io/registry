@@ -4,11 +4,20 @@ import:
 config:
   repository: 'https://github.com/gosub-io/registry.git'
   shared_dirs:
-    - public/index
-    - public/crates
+    - var/uploads/index
+    - var/uploads/crates
   shared_files:
     - tokens.json
     - .env.local
+  writable_dirs:
+    - var
+    - var/cache
+    - var/log
+    - var/sessions
+    - var/uploads
+    - var/uploads/index
+    - var/uploads/crates
+  writable_mode: acl
 
 hosts:
   gosub.io:
@@ -16,6 +25,7 @@ hosts:
       - stage: prod
     remote_user: deploy
     deploy_path: '/wwwroot/registry.gosub.io'
+    http_user: zulip
 
 tasks:
   build:
