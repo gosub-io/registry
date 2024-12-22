@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+            <a href="{{ path('homepage') }}">&laquo; Back</a>
+    <br/>
+    <br/>
+    <div class="grid">
+        <div>
+
+    <form>
+        <fieldset class="grid">
+            <select id="v" name="v" required="">
+                {% for version in versions %}
+                    {% if loop.last %}
+                        <option value="{{ version.vers }}" selected="">Version {{ version.vers }} (latest)</option>
+                    {% else %}
+                        <option value="{{ version.vers }}">Version {{ version.vers }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" value="Select">
+        </fieldset>
+    </form>
+
+
+        </div>
+        <div></div>
+    </div>
+
+
+    <h2>Crate details</h2>
+
+    {% for version in versions %}
+        {% if version.vers == selected_version %}
+
+    <table>
+        <tr><th>Name</th><td>{{ version.name }}</td></tr>
+        <tr><th>Version</th><td>{{ version.vers }}</td></tr>
+        <tr><th>Description</th><td>{{ version.description }}</td></tr>
+        <tr><th>License</th><td>{{ version.license }}</td></tr>
+        <tr><th>Checksum</th><td>{{ version.cksum }}</td></tr>
+        <tr><th>Authors</th><td>{{ version.authors | join("<br>") }}</td></tr>
+        <tr><th>Dependencies</th><td>{{ version.deps | length }}</td></tr>
+
+        <tr><th>&nbsp;</th><td>
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Requirements</th>
+                        <th>Optional</th>
+                        <th>Registry</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+            {% for dep in version.deps %}
+                <tr>
+                    <td class="strong">{{ dep.name }}</td>
+                    <td class="strong">{{ dep.req }}</td>
+                    <td>{% if dep.optional %}Yes{% endif %}&nbsp;</td>
+                    <td>{{ dep.registry| default("") }}</td>
+                </tr>
+            {% endfor %}
+                    </tbody>
+            </table>
+            </td>
+    </table>
+
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

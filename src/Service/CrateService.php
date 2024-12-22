@@ -19,6 +19,24 @@ class CrateService {
         return $this->scanCrates($this->indexDir, $q);
     }
 
+    function getIndicesByCrate(string $name): array {
+        $indexPath = $this->getIndexPath($name);
+        if (!file_exists($indexPath)) {
+            return [];
+        }
+
+        $index_lines = file($indexPath);
+        $crates = [];
+        foreach ($index_lines as $line) {
+            $data = json_decode($line, true);
+            if ($data) {
+                $crates[] = $data;
+            }
+        }
+
+        return $crates;
+    }
+
     protected function scanCrates(string $path, string $q): array {
         $crates = [];
 
@@ -55,5 +73,27 @@ class CrateService {
 
         return $crates;
     }
+
+
+    /**
+     * Convert a crate name to an index path
+     */
+    protected function getIndexPath($crateName): string
+    {
+        $path = $this->indexDir . '/';
+
+        if (strlen($crateName) == 1) {
+            $path .= '1/' . $crateName;
+        } else if (strlen($crateName) == 2) {
+            $path .= '2/' . $crateName;
+        } else if (strlen($crateName) == 3) {
+            $path .= '3/' . $crateName[0] . '/' . $crateName;
+        } else {
+            $path .= substr($crateName, 0, 2) . '/'. substr($crateName, 2, 2) . '/' . $crateName;
+        }
+
+        return $path;
+    }
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CrateService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
+    #[Route('/details/{crate}', name: 'details')]
+    public function details(Request $request, string $crate, CrateService $crateService): Response {
+        $versions = $crateService->getIndicesByCrate($crate);
+
+        return $this->render('index/details.html.twig', [
+            'selected_version' => $request->query->get('v', $versions[count($versions)-1]['vers'] ?? ''),
+            'versions' => $versions,
+        ]);
+    }
+
     #[Route('/{crate}', name: 'index', requirements: ['crate' => '.*'], priority: -100)]
     public function index(Request $request, string $crate): Response {
         $crate = str_replace('-', '_', $crate);

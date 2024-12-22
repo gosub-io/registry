@@ -16,7 +16,7 @@
         <tbody>
         {% for index in indices %}
             <tr>
-                <td><a href="gosub.io">{{ index.name }}</a></td>
+                <td><a href="{{ path('details', { 'crate': index.name }) }}">{{ index.name }}</a></td>
                 <td>{{ index.max_version }}</td>
                 <td>{{ index.description | default("No description available") }}</td>
             </tr>
