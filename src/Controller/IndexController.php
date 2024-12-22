@@ -23,8 +23,7 @@ class IndexController extends AbstractController
 
     #[Route('/crates/{crate}', name: 'download')]
     public function downloads(Request $request, string $crate, CrateService $crateService): Response {
-        $file = $this->file($crateService->getCratePath($crate));
-        return new Response($file);
+        return $this->file($crateService->getCratePath($crate));
     }
 
     #[Route('/{crate}', name: 'index', requirements: ['crate' => '.*'], priority: -100)]
