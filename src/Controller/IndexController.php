@@ -16,19 +16,18 @@ class IndexController extends AbstractController
     public function index(Request $request, string $crate): Response {
         $crate = str_replace('-', '_', $crate);
 
-        $path =
+        $basepath = realpath(
             $this->getParameter('kernel.project_dir') . '/' .
-            $this->getParameter('path_index') . '/' .
-            $crate
-        ;
+            $this->getParameter('path_index') . '/'
+        );
 
-        $realpath = realpath($path);
-        if ($realpath === false || strpos($realpath, $this->getParameter('kernel.project_dir')) !== 0) {
+        $realpath = realpath($basepath . '/' . $crate);
+        if ($realpath === false || strpos($realpath, $basepath) !== 0) {
             throw new NotFoundHttpException("invalid crate url");
         }
 
-        if (file_exists($path)) {
-            $data = file_get_contents($path);
+        if (file_exists($realpath)) {
+            $data = file_get_contents($realpath);
             return new Response($data, 200, ['Content-Type' => 'text/plain']);
         }
 
