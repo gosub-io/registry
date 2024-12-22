@@ -6,6 +6,9 @@ config:
   shared_dirs:
     - public/index
     - public/crates
+  shared_files:
+    - tokens.json
+    - .env.local
 
 hosts:
   gosub.io:
