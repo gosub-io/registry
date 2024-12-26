@@ -30,7 +30,7 @@ class ApiController extends AbstractController
         ;
         file_put_contents($crate_path, $crate_data);
 
-        $path = $crateService->getCratePath($crate_filename);
+        $path = $crateService->getIndexPath($crate_filename);
         if (!file_exists(dirname($path))) {
             mkdir(dirname($path), 0777, true);
         }

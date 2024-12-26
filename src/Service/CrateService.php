@@ -13,14 +13,13 @@ class CrateService {
         $this->indexDir = $indexDir;
     }
 
-    function getCratePath(string $crateName): string
-    {
+    function getCratePath(string $crateName): string {
         $basePath = realpath($this->crateDir);
         $path = $basePath . '/' . $crateName;
 
         $realpath = realpath($path);
         if ($realpath === false || strpos($realpath, $basePath) !== 0) {
-            throw new NotFoundHttpException("invalid crate url");
+            throw new NotFoundHttpException("invalid path");
         }
 
         return $realpath;
