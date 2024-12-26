@@ -92,7 +92,7 @@ class CrateService {
     /**
      * Convert a crate name to an index path
      */
-    protected function getIndexPath($crateName): string
+    function getIndexPath($crateName): string
     {
         $path = $this->indexDir . '/';
 
